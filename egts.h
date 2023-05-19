@@ -706,7 +706,7 @@ int Parse_EGTS_SR_TERM_IDENTITY(EGTS_SR_TERM_IDENTITY_RECORD *record, ST_ANSWER 
 int Parse_EGTS_SR_POS_DATA(EGTS_SR_POS_DATA_RECORD *posdata, ST_RECORD *record, ST_ANSWER *answer, ST_WORKER *worker);
 int Parse_EGTS_SR_EXT_POS_DATA(EGTS_SR_EXT_POS_DATA_RECORD *posdata, ST_RECORD *record);
 int Parse_EGTS_SR_LIQUID_LEVEL_SENSOR(int rlen, EGTS_SR_LIQUID_LEVEL_SENSOR_RECORD *posdata, ST_RECORD *record);
-int Parse_EGTS_SR_COMMAND_DATA(ST_ANSWER *answer, EGTS_SR_COMMAND_DATA_RECORD *record);
+int Parse_EGTS_SR_COMMAND_DATA(EGTS_SR_COMMAND_DATA_RECORD *record, ST_RECORD *record, ST_ANSWER *answer, ST_WORKER *worker);
 int Parse_EGTS_SR_STATE_DATA(EGTS_SR_STATE_DATA_RECORD *statedata, ST_RECORD *record);
 
 // функции для encode
@@ -716,6 +716,7 @@ static int packet_add_subrecord_EGTS_SR_TERM_IDENTITY(char *packet, int position
 static int packet_add_subrecord_EGTS_SR_POS_DATA_RECORD(char *packet, int position, EGTS_RECORD_HEADER *record_header, EGTS_SUBRECORD_HEADER *subrecord_header, ST_RECORD *record);
 static int packet_add_subrecord_EGTS_SR_EXT_POS_DATA_RECORD(char *packet, int position, EGTS_RECORD_HEADER *record_header, EGTS_SUBRECORD_HEADER *subrecord_header, ST_RECORD *record);
 static int packet_add_subrecord_EGTS_SR_LIQUID_LEVEL_SENSOR_RECORD(char *packet, int position, EGTS_RECORD_HEADER *record_header, EGTS_SUBRECORD_HEADER *subrecord_header, ST_RECORD *record);
+static int packet_add_subrecord_EGTS_SR_COMMAND_DATA_RECORD(char *packet, int position, EGTS_RECORD_HEADER *record_header, EGTS_SUBRECORD_HEADER *subrecord_header, ST_RECORD *record);
 
 #endif
 

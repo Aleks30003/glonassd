@@ -244,6 +244,16 @@ void terminal_decode(char *parcel, int parcel_size, ST_ANSWER *answer, ST_WORKER
                 if( worker && worker->listener->log_all ) {
                     logging("terminal_decode[%s:%d]: EGTS_SR_COMMAND_DATA\n", worker->listener->name, worker->listener->port);
                 }
+					
+		// разбираем данные
+		record = &answer->records[answer->count];
+				if( Parse_EGTS_SR_COMMAND_DATA( (EGTS_SR_COMMAND_DATA_RECORD *)&parcel[parcel_pointer], record, answer, worker ) ) {
+					memcpy(&answer->lastpoint, record, sizeof(ST_RECORD));
+    				if( answer->count < MAX_RECORDS - 1 )
+    					answer->count++;
+                    if( worker && worker->listener->log_all )
+                        logging("terminal_decode[%s:%d]: OK, records=%d\n", worker->listener->name, worker->listener->port, answer->count);
+				}
 
 				// сформировать подтверждение в виде подзаписи EGTS_SR_COMMAND_DATA сервиса EGTS_COMMAND_SERVICE
 				answer->size += responce_add_record(answer->answer, answer->size, rec_head->RN, EGTS_PC_OK);
